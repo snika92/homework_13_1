@@ -8,3 +8,5 @@ def test_product():
     assert prod1.description == 'для футбола'
     assert prod1.price == 50.5
     assert prod1.quantity == 10
+
+
