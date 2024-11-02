@@ -10,7 +10,7 @@ class Product:
         Product.all.append(self)
 
     def __str__(self):
-        return f"{self.title}, цена: {self._price}, количество: {self.quantity}"
+        return f"{self.title}, {self._price} руб. Остаток: {self.quantity} шт."
 
     @classmethod
     def make_product(cls, title, description, price, quantity):
@@ -40,7 +40,10 @@ class Product:
         else:
             print("Введена некорректная цена")
 
+    def __add__(self, other):
+        return self._price * self.quantity + other._price * other.quantity
 
+#
 # prod1 = Product('Мяч', 'для футбола', 50.5, 10)
 # assert prod1.title == 'Мяч'
 # assert prod1.description == 'для футбола'
@@ -49,6 +52,7 @@ class Product:
 #
 # prod2 = Product.make_product("Кукла", "Фарфоровая", 100.00, 50)
 # prod3 = Product.make_product("Пирамидка", "Деревянная", 70.25, 30)
+# print(prod2 + prod3)
 #
 # print(prod2)
 # print(prod3)
