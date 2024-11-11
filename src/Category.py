@@ -35,10 +35,18 @@ class Category:
         return list_of_products
         # return self.__products
 
-    @products.setter
-    def products(self, obj_product):
-        self.__products.append(obj_product)
-        Category.amount_of_products += 1
+    # @products.setter
+    # def products(self, obj_product):
+    #     self.__products.append(obj_product)
+    #     Category.amount_of_products += 1
+
+    def add_product(self, product: Product):
+        """ Add product to products list """
+        if not issubclass(type(product), Product):
+            raise TypeError
+        if product not in self.__products:
+            self.__products.append(product)
+            Category.amount_of_products += 1
 
 
 # prod1 = Product("Мяч", "Футбольный", 50.50, 10)

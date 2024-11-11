@@ -1,11 +1,12 @@
 class Product:
     all = []
 
-    def __init__(self, title: str, description: str, price: float, quantity: int):
+    def __init__(self, title: str, description: str, price: float, quantity: int, color=None):
         self.title = title
         self.description = description
         self._price = price
         self.quantity = quantity
+        self.color = color
 
         Product.all.append(self)
 
@@ -41,7 +42,45 @@ class Product:
             print("Введена некорректная цена")
 
     def __add__(self, other):
-        return self._price * self.quantity + other._price * other.quantity
+        if isinstance(other, type(self)):
+            return self._price * self.quantity + other._price * other.quantity
+        raise TypeError("You can only apply add function to products of the same class.")
+
+
+class SmartPhone(Product):
+    """ Represents a smartphone. <- Product """
+    def __init__(
+            self, title: str,
+            description: str,
+            price: float,
+            count: int,
+            performance: int,
+            model: str,
+            memory: int,
+            color
+    ):
+        """ SmartPhone constructor """
+        super().__init__(title, description, price, count, color)
+        self.performance = performance
+        self.model = model
+        self.memory = memory
+
+
+class LawnGrass(Product):
+    """ Represents a lawn grass. <- Product """
+    def __init__(
+            self, title: str,
+            description: str,
+            price: float,
+            count: int,
+            manufacturer_country: str,
+            germination_period: str,
+            color: str
+    ):
+        """ Lawn grass constructor """
+        super().__init__(title, description, price, count, color)
+        self.manufacturer_country = manufacturer_country
+        self.germination_period = germination_period
 
 #
 # prod1 = Product('Мяч', 'для футбола', 50.5, 10)
