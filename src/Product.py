@@ -1,4 +1,15 @@
-class Product:
+from abc import ABC, abstractmethod
+from src.MixinLog import MixinLog
+
+
+class BaseProduct(ABC):
+    @classmethod
+    @abstractmethod
+    def make_product(cls, *args, **kwargs):
+        pass
+
+
+class Product(MixinLog, BaseProduct):
     all = []
 
     def __init__(self, title: str, description: str, price: float, quantity: int, color=None):
@@ -47,7 +58,7 @@ class Product:
         raise TypeError("You can only apply add function to products of the same class.")
 
 
-class SmartPhone(Product):
+class SmartPhone(Product, MixinLog):
     """ Represents a smartphone. <- Product """
     def __init__(
             self, title: str,
@@ -66,7 +77,7 @@ class SmartPhone(Product):
         self.memory = memory
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, MixinLog):
     """ Represents a lawn grass. <- Product """
     def __init__(
             self, title: str,
@@ -82,7 +93,8 @@ class LawnGrass(Product):
         self.manufacturer_country = manufacturer_country
         self.germination_period = germination_period
 
-#
+
+# print(Product.__mro__)
 # prod1 = Product('Мяч', 'для футбола', 50.5, 10)
 # assert prod1.title == 'Мяч'
 # assert prod1.description == 'для футбола'
@@ -115,3 +127,9 @@ class LawnGrass(Product):
 # print(prod1.price)
 # prod1.price = 0
 # print(prod1.price)
+#
+# print(prod6)
+
+
+grass = LawnGrass("Трава", "Зеленая", 3412, 93, "Russia", "winter",  color="green")
+print(repr(grass))

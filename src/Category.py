@@ -1,7 +1,8 @@
 from src.Product import Product
+from src.Order import BaseEntity
 
 
-class Category:
+class Category(BaseEntity):
     amount_of_categories = 0
     amount_of_products = 0
     all = []
